@@ -10,8 +10,8 @@ export default defineConfig([
         },
         languageOptions: {
             globals: {
+                ...globals.jest,
                 ...globals.browser,
-                ...global.jest,
                 ...globals.node
             }
         },

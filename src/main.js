@@ -73,6 +73,23 @@ const caesarCipher = (str, shift) => {
 };
 
 
+const analayzeArray = (arr) => {
+
+    const length = arr.length;
+    const average = arr.reduce((acc, curr) => acc + curr, 0) / length;
+    const min = arr.reduce((acc, curr) => curr < acc ? curr : acc);
+    const max = arr.reduce((acc, curr) => curr > acc ? curr : acc);
+
+    return {
+        average,
+        min,
+        max,
+        length
+
+    };
+};
+
+
 export {
     capitalize,
     reverseString,
@@ -80,5 +97,6 @@ export {
     caesarCipher,
     createCipherMap,
     shiftAlphabet,
-    isCapitalized
+    isCapitalized,
+    analayzeArray
 };

@@ -1,6 +1,6 @@
-import { capitalize, reverseString, calculator, caesarCipher, shiftAlphabet, createCipherMap, isCapitalized } from "../main.js";
+import { capitalize, reverseString, calculator, caesarCipher, shiftAlphabet, createCipherMap, isCapitalized, analayzeArray } from "../main.js";
 
-describe("Capitalize Suite", () => {
+describe("Capitalizations", () => {
     test("Capitalize one word", () => {
         expect(capitalize("hello")).toBe("Hello");
     });
@@ -20,7 +20,7 @@ describe("Reverse String", () => {
 
 });
 
-describe("Calculator Tests", () => {
+describe("Calculator", () => {
     test("add", () => {
         expect(calculator.add(1, 2)).toBe(3);
     });
@@ -68,4 +68,20 @@ describe("Caesar Cipher Tests", () => {
         expect(shiftAlphabet("abcdefghijklmnopqrstuvwxyz", 26)).toBe("abcdefghijklmnopqrstuvwxyz");
     });
 
+});
+
+describe("Array Analization", () => {
+    test("analyzeArray", () => {
+        expect(analayzeArray([1, 8, 3, 4, 2, 6])).toHaveProperty("average", 4);
+        expect(analayzeArray([1, 8, 3, 4, 2, 6])).toHaveProperty("min", 1);
+        expect(analayzeArray([1, 8, 3, 4, 2, 6])).toHaveProperty("max", 8);
+        expect(analayzeArray([1, 8, 3, 4, 2, 6])).toHaveProperty("length", 6);
+    });
+
+    test("analyzeArray 2", () => {
+        expect(analayzeArray([3, 1, 2, 5, 4])).toHaveProperty("average", 3);
+        expect(analayzeArray([3, 1, 2, 5, 4])).toHaveProperty("min", 1);
+        expect(analayzeArray([3, 1, 2, 5, 4])).toHaveProperty("max", 5);
+        expect(analayzeArray([3, 1, 2, 5, 4])).toHaveProperty("length", 5);
+    });
 });

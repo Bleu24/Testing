@@ -89,6 +89,34 @@ const analayzeArray = (arr) => {
     };
 };
 
+const collectSummaries = (obj) => {
+    const objEntry = Object.entries(obj);
+    const summaries = [];
+
+    for (const [key, value] of objEntry) {
+        if (key === "summary" && typeof value === "string") summaries.push(value); //case 1
+        else if (Array.isArray(value)) {
+            for (const item of value) {
+                summaries.push(...collectSummaries(item));
+            }
+        }
+        else continue;
+    }
+
+    return summaries;
+};
+
+const flattenArray = (arr, depth, result = []) => {
+    if (depth === 0) return arr;
+
+    for (const item of arr) {
+        if (Array.isArray(item)) result.push(...flattenArray(item, depth - 1));
+        else result.push(item);
+    }
+
+    return result;
+};
+
 
 export {
     capitalize,
@@ -98,5 +126,7 @@ export {
     createCipherMap,
     shiftAlphabet,
     isCapitalized,
-    analayzeArray
+    analayzeArray,
+    collectSummaries,
+    flattenArray
 };

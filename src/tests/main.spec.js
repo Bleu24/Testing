@@ -1,4 +1,4 @@
-import { capitalize, reverseString, calculator, caesarCipher, shiftAlphabet, createCipherMap, isCapitalized, analayzeArray } from "../main.js";
+import { capitalize, reverseString, calculator, caesarCipher, shiftAlphabet, createCipherMap, isCapitalized, analayzeArray, collectSummaries, flattenArray } from "../main.js";
 
 describe("Capitalizations", () => {
     test("Capitalize one word", () => {
@@ -85,3 +85,83 @@ describe("Array Analization", () => {
         expect(analayzeArray([3, 1, 2, 5, 4])).toHaveProperty("length", 5);
     });
 });
+
+const knowledgeBase = {
+    title: "Company Knowledge Base",
+    summary: "Top-level overview of all company operations.",
+    departments: [
+        {
+            name: "Engineering",
+            summary: "Builds and maintains all software products.",
+            teams: [
+                {
+                    name: "Frontend",
+                    summary: "Handles all UI and client-side code.",
+                    members: [
+                        {
+                            name: "Alice",
+                            summary: "Specializes in React and accessibility.",
+                            projects: [
+                                { title: "Dashboard Redesign", summary: "Revamped the main dashboard for better UX." },
+                                { title: "Component Library", summary: "Built reusable UI components used across products." }
+                            ]
+                        },
+                        {
+                            name: "Bob",
+                            summary: "Focuses on performance optimization.",
+                            projects: [
+                                { title: "Lazy Loading", summary: "Reduced initial load time by 40%." }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: "Backend",
+                    summary: "Manages APIs, databases, and server infrastructure.",
+                    members: [
+                        {
+                            name: "Carol",
+                            summary: "Expert in distributed systems.",
+                            projects: [
+                                { title: "Auth Service", summary: "Built the company-wide authentication microservice." }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: "Marketing",
+            summary: "Drives growth and brand awareness.",
+            teams: [
+                {
+                    name: "Content",
+                    summary: "Produces blog posts, videos, and social media.",
+                    members: [
+                        {
+                            name: "Dan",
+                            summary: "Writes long-form technical content.",
+                            projects: [
+                                { title: "Dev Blog", summary: "Launched the engineering blog with 10k monthly readers." }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+describe("recursions", () => {
+    test("collected summaries has the correct count", () => {
+        const result = collectSummaries(knowledgeBase);
+        expect(result.length).toBe(15);
+    });
+
+    test("flatten array", () => {
+        const data = [1, [2, [3, [4, [5]]]]];
+        expect(flattenArray(data, 0)).toStrictEqual([1, [2, [3, [4, [5]]]]]);
+        expect(flattenArray(data, 1)).toStrictEqual([1, 2, [3, [4, [5]]]]);
+    });
+});
+
